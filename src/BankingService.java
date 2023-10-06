@@ -19,12 +19,24 @@ public class BankingService {
         return accounts.findAccount(forAcctNum).withdraw(amt);
     }
 
-    public String login(String custname, String withPwd) {
+    public boolean login(String custname, String withPwd) throws CustNotFoundException {
+        // Handle error, or pass it on
         Customer cust = customers.findCustomer(custname);
+        // Would like to be able to handle error in a way that's
+        // not the normal control flow
         if (cust.checkPwd(withPwd)) {
-            return "Welcome";
+            return true;
         } else {
-            return "Try Again";
+            return false;
         }
     }
+
+//    public boolean login(String custname, String withPwd) {
+//        Customer cust = customers.findCustomer(custname);
+//        if (cust.checkPwd(withPwd)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }
